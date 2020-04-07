@@ -11,6 +11,7 @@ namespace BioLab
         public string Title { get; set; }
         [HtmlAttributeName("src")]
         public string ImageLink { get; set; }
+        public string MoviePlot { get; set; }
 
     }
 }

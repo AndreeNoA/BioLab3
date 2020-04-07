@@ -1,5 +1,4 @@
 ﻿@page
-@using BioLab.Controllers
 @model BioLab.IndexModel
 
 @{
@@ -9,9 +8,6 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 
 @if (Model.Movie.Count() > 0)
 {
@@ -30,17 +26,17 @@
         <tbody>
             @foreach (var item in Model.Movie)
             {
+
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Title)
+                        <h2>@Html.DisplayFor(modelItem => item.Title)</h2> <br /><br /><br />
+                        @Html.DisplayFor(modelItem => item.MoviePlot)
+                    </td>
+                    <td class="w-50 mt-4">
+                        <img src=@item.ImageLink class="img-thumbnail">
                     </td>
                     <td>
-                        <img src=@item.ImageLink>
-                    </td>
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-page="./Details" asp-route-id="@item.Id">Info / Book seats</a> 
                     </td>
                 </tr>
             }
