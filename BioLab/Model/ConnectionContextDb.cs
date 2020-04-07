@@ -6,7 +6,7 @@ namespace BioLab
     {
         public ConnectionContextDb(DbContextOptions<ConnectionContextDb> options) : base(options)
         {
-
+            Database.EnsureCreated();
         }
 
         public DbSet<Movie> Movie { get; set; }
