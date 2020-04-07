@@ -23,5 +23,29 @@ namespace BioLab
         {
             Movie = await _context.Movie.ToListAsync();
         }
+
+        public IActionResult OnGetSeed()
+        {
+            Initialize(_context);
+            return RedirectToPage("./Index");
+        }
+
+        public static void Initialize(ConnectionContextDb context)
+        {
+            context.Movie.Add(new Movie
+            {
+                Id = new Guid(),
+                Title = "The Hangover",
+                ImageLink = "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Hangoverposter09.jpg/220px-Hangoverposter09.jpg"
+            });
+            context.Movie.Add(new Movie
+            {
+                Id = new Guid(),
+                Title = "Top Gun",
+                ImageLink = "https://en.wikipedia.org/wiki/File:Top_Gun_Movie.jpg"
+            });
+            context.SaveChanges();
+        }
     }
+
 }

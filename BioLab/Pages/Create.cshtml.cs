@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace BioLab
 {
     public class CreateModel : PageModel
@@ -34,6 +35,7 @@ namespace BioLab
                 return Page();
             }
 
+            
             _context.Movie.Add(Movie);
             await _context.SaveChangesAsync();
 
@@ -42,7 +44,7 @@ namespace BioLab
         //public IActionResult Seed()
         //{
         //    Initialize(_context);
-        //    return RedirectToAction("./Index");
+        //    return RedirectToAction("./Privacy");
         //}
         //
         //public static void Initialize(ConnectionContextDb context)
