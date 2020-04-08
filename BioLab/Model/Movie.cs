@@ -8,9 +8,8 @@ namespace BioLab
     {
         [Key]
         public Guid Id { get; set; }
-        public string Title { get; set; }
-        [HtmlAttributeName("src")]
-        public string ImageLink { get; set; }
+        public string MovieTitle { get; set; }
+        public string MoviePoster { get; set; }
         public string MoviePlot { get; set; }
 
     }

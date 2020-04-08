@@ -10,5 +10,6 @@ namespace BioLab
         }
 
         public DbSet<Movie> Movie { get; set; }
+        public DbSet<Showtime> Showtime { get; set; }
     }
 }

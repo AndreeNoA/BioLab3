@@ -29,11 +29,11 @@
 
                 <tr>
                     <td>
-                        <h2>@Html.DisplayFor(modelItem => item.Title)</h2> <br /><br /><br />
+                        <h2>@Html.DisplayFor(modelItem => item.MovieTitle)</h2> <br /><br /><br />
                         @Html.DisplayFor(modelItem => item.MoviePlot)
                     </td>
                     <td class="w-50 mt-4">
-                        <img src=@item.ImageLink class="img-thumbnail">
+                        <img src=@item.MoviePoster class="img-thumbnail">
                     </td>
                     <td>
                         <a asp-page="./Details" asp-route-id="@item.Id">Info / Book seats</a> 

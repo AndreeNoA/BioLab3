@@ -18,6 +18,7 @@ namespace BioLab
         }
 
         public Movie Movie { get; set; }
+        public Showtime Showtime { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {

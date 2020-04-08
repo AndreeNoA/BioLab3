@@ -13,22 +13,25 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.Title)
+            @Html.DisplayNameFor(model => model.Movie.MovieTitle)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Movie.Title)
+            @Html.DisplayFor(model => model.Movie.MovieTitle)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movie.ImageLink)
+            @Html.DisplayNameFor(model => model.Movie.MoviePoster)
         </dt>
         <dd class="col-sm-10">
             <div style="max-width: 700px">
-                <img src=@Model.Movie.ImageLink class="img-thumbnail">
+                <img src=@Model.Movie.MoviePoster class="img-thumbnail">
             </div>
 
         </dd>
     </dl>
 </div>
+<h1>
+    @Html.DisplayFor(model => model.Showtime.ShowtimeDate)
+</h1>
 <div>
     <a asp-page="./Book" asp-route-id="@Model.Movie.Id">Book the seats!</a> |
     <a asp-page="./Index">Back to List</a>
