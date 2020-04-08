@@ -18,10 +18,11 @@ namespace BioLab
         }
 
         public IList<Movie> Movie { get;set; }
+        public IList<Showtime> Showtimes { get; set; }
 
         public async Task OnGetAsync()
         {
-            Movie = await _context.Movie.ToListAsync();
+            Showtimes = await _context.Showtime.ToListAsync();
         }
 
         public IActionResult OnGetSeed()

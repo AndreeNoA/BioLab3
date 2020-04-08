@@ -18,8 +18,11 @@ namespace BioLab
             _context = context;
         }
 
+       // [BindProperty]
+       // public Movie Movie { get; set; }
         [BindProperty]
-        public Movie Movie { get; set; }
+
+        public Showtime Showtime { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -28,9 +31,9 @@ namespace BioLab
                 return NotFound();
             }
 
-            Movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
+            Showtime = await _context.Showtime.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Movie == null)
+            if (Showtime == null)
             {
                 return NotFound();
             }
@@ -39,37 +42,37 @@ namespace BioLab
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        //public async Task<IActionResult> OnPostAsync()
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Page();
+        //    }
+        //
+        //    _context.Attach(Showtime).State = EntityState.Modified;
+        //
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ShowtimeExists(Showtime.Id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+        //
+        //    return RedirectToPage("./Index");
+        //}
+
+        private bool ShowtimeExists(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(Movie).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MovieExists(Movie.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool MovieExists(Guid id)
-        {
-            return _context.Movie.Any(e => e.Id == id);
+            return _context.Showtime.Any(e => e.Id == id);
         }
     }
 }

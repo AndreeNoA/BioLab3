@@ -9,7 +9,7 @@
 <h1>Index</h1>
 
 
-@if (Model.Movie.Count() > 0)
+@if (Model.Showtimes.Count() > 0)
 {
     <table class="table">
         <thead>
@@ -24,16 +24,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Movie)
+            @foreach (var item in Model.Showtimes)
             {
 
                 <tr>
                     <td>
-                        <h2>@Html.DisplayFor(modelItem => item.MovieTitle)</h2> <br /><br /><br />
-                        @Html.DisplayFor(modelItem => item.MoviePlot)
+                        <h2>@Html.DisplayFor(modelItem => item.ShowtimeMovie.MovieTitle)</h2> <br /><br /><br />
+                        @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot)
                     </td>
                     <td class="w-50 mt-4">
-                        <img src=@item.MoviePoster class="img-thumbnail">
+                        <img src=@item.ShowtimeMovie.MoviePoster class="img-thumbnail">
                     </td>
                     <td>
                         <a asp-page="./Details" asp-route-id="@item.Id">Info / Book seats</a> 

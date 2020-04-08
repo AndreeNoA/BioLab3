@@ -27,13 +27,14 @@ namespace BioLab
                 return NotFound();
             }
 
-            Movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
+            Showtime = await _context.Showtime.FirstOrDefaultAsync(s => s.Id == id);
 
-            if (Movie == null)
+            if (Showtime == null)
             {
                 return NotFound();
             }
             return Page();
         }
+
     }
 }
