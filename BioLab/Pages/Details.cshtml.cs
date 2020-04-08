@@ -35,6 +35,5 @@ namespace BioLab
             }
             return Page();
         }
-
     }
 }

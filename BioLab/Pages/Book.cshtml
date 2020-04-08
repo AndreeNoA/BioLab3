@@ -10,18 +10,36 @@
 
 <h4>Movie</h4>
 <hr />
-<div>
-    Booking confirmation
-    @Html.DisplayFor(model => model.Showtime.ShowtimeMovie.MoviePlot)
-    <br />
-    Antal platser bokade:
-    <h1>"The value for number is: " <span id="myText"></span></h1>
+<body onload="myFunction()">
 
-</div>
+    <div>   
+        @Html.DisplayFor(model => model.Showtime.ShowtimeMovie.MoviePlot)
+        <br /><br />
+        Antal lediga platser:
+        @Html.DisplayFor(model => model.Showtime.NumOfSeats)
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+    </div>
+    <form asp-action="BookSeats" asp-route-id="@Model.Showtime.Id">
+        <fieldset>
+            <legend>Choose number of seats</legend>           
+            <div class="form-group">
+                <label asp-for="Showtime.NumberOfBookedSeats">Example select</label>
+                <select class="form-control" id="exampleSelect1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>  
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+    </form>
+
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</body>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

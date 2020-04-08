@@ -30,7 +30,8 @@
                 <tr>
                     <td>
                         <h2>@Html.DisplayFor(modelItem => item.ShowtimeMovie.MovieTitle)</h2> <br /><br /><br />
-                        @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot)
+                        @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot)<br />
+                        @Html.DisplayFor(modelItem => item.NumOfSeats)
                     </td>
                     <td class="w-50 mt-4">
                         <img src=@item.ShowtimeMovie.MoviePoster class="img-thumbnail">

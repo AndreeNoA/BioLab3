@@ -42,37 +42,48 @@ namespace BioLab
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        //public async Task<IActionResult> OnPostAsync()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Page();
-        //    }
-        //
-        //    _context.Attach(Showtime).State = EntityState.Modified;
-        //
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ShowtimeExists(Showtime.Id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-        //
-        //    return RedirectToPage("./Index");
-        //}
+        public async Task<IActionResult> OnPostAsync()
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+        
+            _context.Attach(Showtime).State = EntityState.Modified;
+        
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ShowtimeExists(Showtime.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        
+            return RedirectToPage("./Index");
+        }
 
         private bool ShowtimeExists(Guid id)
         {
             return _context.Showtime.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> BookSeats(Guid? id)
+        {
+            var show = await _context.Showtime.FindAsync(id);
+
+            show.NumOfSeats = show.NumOfSeats - show.NumberOfBookedSeats;
+            _context.Showtime.Update(show);
+            await _context.SaveChangesAsync();
+            return RedirectToPage("./Index");
         }
     }
 }

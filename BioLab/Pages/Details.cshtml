@@ -33,17 +33,6 @@
     Time of showing @Html.DisplayFor(model => model.Showtime.ShowtimeDate)
 </h1>
 
-<form asp-page="./Book" asp-route-id="@Model.Showtime.Id">
-    <label for="fname">Number of seats:</label><br>
-    <input type="number" id="numOfSeats" name="Numberofseats" value="1"><br>
-    <input type="submit" value="Submit">
-</form>
-
-<form id="form" onsubmit="return false;">
-    <input type="number" id="userInput" />
-    <input type="submit" onclick="othername();" />
-</form>
-
 <div>
     <a asp-page="./Book" asp-route-id="@Model.Showtime.Id">Book the seats!</a> |
     <a asp-page="./Index">Back to List</a>
