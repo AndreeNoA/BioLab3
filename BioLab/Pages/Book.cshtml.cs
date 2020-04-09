@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BioLab
 {
-    public class EditModel : PageModel
+    public class BookingModel : PageModel
     {
-        private readonly BioLab.ConnectionContextDb _context;
+        private readonly ConnectionContextDb _context;
 
-        public EditModel(BioLab.ConnectionContextDb context)
+        public BookingModel(ConnectionContextDb context)
         {
             _context = context;
         }
@@ -24,9 +24,7 @@ namespace BioLab
         public async Task OnGet(Guid? id)
         {
             Showtime = await _context.Showtime.FindAsync(id);
-
         }
-
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
@@ -36,12 +34,9 @@ namespace BioLab
 
                 await _context.SaveChangesAsync();
 
-
-
                 return RedirectToPage("Index");
             }
             return RedirectToPage();
         }
-
     }
 }

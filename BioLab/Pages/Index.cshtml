@@ -8,64 +8,59 @@
 
 <h1 style="text-align:center">Cinema</h1>
 
-
 @if (Model.Showtimes.Count() > 0)
 {
     <table class="table">
-        
         <tbody>
             @foreach (var item in Model.Showtimes.Where(i => i.ShowtimeDate.Date == DateTime.Today))
             {
-            <tr>
-
-                @if (item.OpenSeats > 0)
-                {
-                <td>
-                    <h2>@Html.DisplayFor(modelItem => item.ShowtimeMovie.MovieTitle)</h2> <br /><br /><br />
-                    @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot)<br /><br />
-                    @if (item.NumOfSeats == 50)
+                <tr>
+                    @if (item.OpenSeats > 0)
                     {
-                        <h2>Lilla Salongen</h2>
+                        <td>
+                            <h2>@Html.DisplayFor(modelItem => item.ShowtimeMovie.MovieTitle)</h2> <br /><br /><br />
+                            @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot)<br /><br />
 
+                            @if (item.NumOfSeats == 50)
+                            {
+                                <h2>Lilla Salongen</h2><br /><br />
+                            }
+                            else
+                            {
+                                <h2>Stora Salongen</h2><br /><br />
+                            }
+                            <P>Number of available seats: @Html.DisplayFor(modelItem => item.OpenSeats) </P>
+                        </td>
+                        <td class="w-50 mt-4">
+                            <img src=@item.ShowtimeMovie.MoviePoster class="img-thumbnail">
+                        </td>
+                        <td>
+                            <a asp-page="./Details" asp-route-id="@item.Id">Info / Book seats</a>
+                        </td>
                     }
                     else
                     {
-                        <h2>Stora Salongen</h2>
-                    }<br /><br />
-                           <P>Number of available seats: @Html.DisplayFor(modelItem => item.OpenSeats) </P>
-                </td>
-                    <td class="w-50 mt-4">
-                        <img src=@item.ShowtimeMovie.MoviePoster class="img-thumbnail">
-                    </td>
-                    <td>
-                        <a asp-page="./Details" asp-route-id="@item.Id">Info / Book seats</a>
-                    </td>
-                }
-                else
-                {
-            <td style="background-color:gray">
-                <h2>@Html.DisplayFor(modelItem => item.ShowtimeMovie.MovieTitle)</h2> <br /><br /><br />
-                @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot) <br /><br />
-                @if (item.NumOfSeats == 50)
-                {
-                    <h2>Lilla Salongen</h2>
-
-                }
-                else
-                {
-                    <h2>Stora Salongen</h2>
-                }
-                     <br /><br /><h2> This show is fully booked </h2>
-            </td>
-                    <td class="w-50 mt-4" style="background-color:gray">
-                        <img src=@item.ShowtimeMovie.MoviePoster class="img-thumbnail">
-                    </td>
-                    <td style="background-color:gray">
-                        <div>No available seats</div>
-                    </td>
-                }
-
-            </tr>
+                        <td style="background-color:gray">
+                            <h2>@Html.DisplayFor(modelItem => item.ShowtimeMovie.MovieTitle)</h2> <br /><br /><br />
+                            @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot) <br /><br />
+                            @if (item.NumOfSeats == 50)
+                            {
+                                <h2>Lilla Salongen</h2>
+                            }
+                            else
+                            {
+                                <h2>Stora Salongen</h2>
+                            }
+                            <br /><br /><h2> This show is fully booked </h2>
+                        </td>
+                        <td class="w-50 mt-4" style="background-color:gray">
+                            <img src=@item.ShowtimeMovie.MoviePoster class="img-thumbnail">
+                        </td>
+                        <td style="background-color:gray">
+                            <div>No available seats</div>
+                        </td>
+                    }
+                </tr>
             }
         </tbody>
     </table>
@@ -73,6 +68,6 @@
 else
 {
     <div class="container text-center">
-        <a asp-page-handler="Seed" class="btn btn-dark w-25 m-1">Seed</a>
+        <a asp-page-handler="SeedDb" class="btn btn-dark w-25 m-1">Seed</a>
     </div>
 }

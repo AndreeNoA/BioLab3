@@ -10,14 +10,13 @@ namespace BioLab
 {
     public class IndexModel : PageModel
     {
-        private readonly BioLab.ConnectionContextDb _context;
+        private readonly ConnectionContextDb _context;
 
-        public IndexModel(BioLab.ConnectionContextDb context)
+        public IndexModel(ConnectionContextDb context)
         {
             _context = context;
         }
 
-        public IList<Movie> Movie { get;set; }
         public IList<Showtime> Showtimes { get; set; }
 
         public async Task OnGetAsync()
@@ -25,22 +24,21 @@ namespace BioLab
             Showtimes = await _context.Showtime.ToListAsync();
         }
 
-        public IActionResult OnGetSeed()
+        public IActionResult OnGetSeedDb()
         {
-            Initialize(_context);
+            SeedingDb(_context);
             return RedirectToPage("./Index");
         }
 
         public static DateTime setMovieTime(int hour, int minute, int second)
         {
-
-            DateTime s = DateTime.Now;
-            TimeSpan ts = new TimeSpan(hour, minute, second);
-            s = s.Date + ts;
-            return s;
+            DateTime date = DateTime.Now;
+            TimeSpan time = new TimeSpan(hour, minute, second);
+            date = date.Date + time;
+            return date;
         }
 
-        public static void Initialize(ConnectionContextDb context)
+        public static void SeedingDb(ConnectionContextDb context)
         {
             context.Movie.Add(new Movie
             {
@@ -79,9 +77,7 @@ namespace BioLab
                             "The emperor's son is enraged when he is passed over as heir in favour of his father's favourite general. He kills his father and arranges the murder of the general's family, " +
                             "and the general is sold into slavery to be trained as a gladiator - but his subsequent popularity in the arena threatens the throne."
             });
-            context.SaveChanges();
-            
-            context.Showtime.Add(new Showtime 
+            context.Showtime.Add(new Showtime
             {
                 Id = new Guid(),
                 ShowtimeMovie = context.Movie.Where(m => m.MovieTitle == "Boondock Saints").FirstOrDefault(),

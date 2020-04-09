@@ -10,14 +10,13 @@ namespace BioLab
 {
     public class DetailsModel : PageModel
     {
-        private readonly BioLab.ConnectionContextDb _context;
+        private readonly ConnectionContextDb _context;
 
-        public DetailsModel(BioLab.ConnectionContextDb context)
+        public DetailsModel(ConnectionContextDb context)
         {
             _context = context;
         }
 
-        public Movie Movie { get; set; }
         public Showtime Showtime { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)

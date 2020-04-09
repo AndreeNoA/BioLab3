@@ -14,7 +14,6 @@ namespace BioLab
         public int NumOfSeats { get; set; }
         public DateTime ShowtimeDate { get; set; }
         public int NumberOfBookedSeats { get; set; }
-
         public int OpenSeats
         {
             get

@@ -1,5 +1,5 @@
 ﻿@page
-@model BioLab.EditModel
+@model BioLab.BookingModel
 
 @{
     ViewData["Title"] = "Booking";
@@ -11,55 +11,50 @@
 <h2 style="text-align:center"> @Html.DisplayFor(model => model.Showtime.ShowtimeMovie.MovieTitle)</h2>
 <hr />
 <body>
-<script>
+    <script>
+        window.onload = function () {
 
-window.onload = function () {
+            var select = document.getElementById('seatsSelected');
+            let numberseat = 1;
 
-        var select = document.getElementById('myselect');
-        let numberseat = 1;
+            select.addEventListener("change", function () {
+                numberseat = this.value;
+            });
 
-        select.addEventListener("change", function () {
-            numberseat = this.value;
-        });
+            document.getElementById("bookingButton").addEventListener("click", function () {
+                myFunction(numberseat);
+            });
 
-        document.getElementById("bookbutton").addEventListener("click", function () {
-            myFunction(numberseat);
-        });
-
-        function myFunction(x) {
-            var text = "You have booked " + x + " seats.";
-            alert(text);
+            function myFunction(x) {
+                var text = "You have booked " + x + " seats.";
+                alert(text);
+            }
         }
- }
-
-</script>
+    </script>
     <div>
         @Html.DisplayFor(model => model.Showtime.ShowtimeMovie.MoviePlot)
         <br /><br />
         Available seats:
         @Html.DisplayFor(model => model.Showtime.OpenSeats) <br /><br />
-
     </div>
     <form method="post">
         <input type="hidden" asp-for="Showtime.Id" />
         <fieldset>
-           
             <div class="form-group">
                 <label asp-for="Showtime.NumberOfBookedSeats" style="font-size:130%"> Choose number of seats </label>
-                <select asp-for="Showtime.NumberOfBookedSeats" class="form-control" id="myselect">
+                <select asp-for="Showtime.NumberOfBookedSeats" class="form-control" id="seatsSelected">
                     <option selected>1</option>
                     @for (int i = 2; i <= Model.Showtime.OpenSeats && i <= 12; i++)
                     {
                         <option>@i</option>
                     }
-                </select>               
+                </select>
             </div>
-            <button type="submit" class="btn btn-primary" id="bookbutton">Book</button>
+            <button type="submit" class="btn btn-primary" id="bookingButton">Book</button>
         </fieldset>
     </form>
-
     <div style="text-align:center">
-        <a  asp-page="./Index">Back to List</a>
+        <a asp-page="./Index">Back to List</a>
     </div>
 </body>
 
