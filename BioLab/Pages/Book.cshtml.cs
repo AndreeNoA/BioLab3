@@ -18,72 +18,30 @@ namespace BioLab
             _context = context;
         }
 
-       // [BindProperty]
-       // public Movie Movie { get; set; }
         [BindProperty]
-
         public Showtime Showtime { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task OnGet(Guid? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            Showtime = await _context.Showtime.FindAsync(id);
 
-            Showtime = await _context.Showtime.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (Showtime == null)
-            {
-                return NotFound();
-            }
-            return Page();
         }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPost()
         {
+            if (ModelState.IsValid)
+            {
+                var movieFromDb = await _context.Showtime.FindAsync(Showtime.Id);
+                movieFromDb.NumberOfBookedSeats += Showtime.NumberOfBookedSeats;
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-        
-            _context.Attach(Showtime).State = EntityState.Modified;
-        
-            try
-            {
                 await _context.SaveChangesAsync();
+
+
+
+                return RedirectToPage("Index");
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ShowtimeExists(Showtime.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-        
-            return RedirectToPage("./Index");
+            return RedirectToPage();
         }
 
-        private bool ShowtimeExists(Guid id)
-        {
-            return _context.Showtime.Any(e => e.Id == id);
-        }
-
-        public async Task<IActionResult> BookSeats(Guid? id)
-        {
-            var show = await _context.Showtime.FindAsync(id);
-
-            show.NumOfSeats = show.NumOfSeats - show.NumberOfBookedSeats;
-            _context.Showtime.Update(show);
-            await _context.SaveChangesAsync();
-            return RedirectToPage("./Index");
-        }
     }
 }

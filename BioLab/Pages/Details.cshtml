@@ -29,10 +29,21 @@
         </dd>
     </dl>
 </div>
-<h1>
+<h2>
     Time of showing @Html.DisplayFor(model => model.Showtime.ShowtimeDate)
-</h1>
+</h2>
+<h2>
+    Available seats @Html.DisplayFor(model => model.Showtime.OpenSeats)
+</h2>
+@if (Model.Showtime.NumOfSeats == 50)
+{   
+    <h2>Lilla Salongen</h2>
 
+}
+else
+{
+    <h2>Stora Salongen</h2>
+}
 <div>
     <a asp-page="./Book" asp-route-id="@Model.Showtime.Id">Book the seats!</a> |
     <a asp-page="./Index">Back to List</a>

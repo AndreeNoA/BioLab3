@@ -10,29 +10,50 @@
 
 <h4>Movie</h4>
 <hr />
-<body onload="myFunction()">
+<body>
+<script>
 
-    <div>   
+window.onload = function () {
+
+        var select = document.getElementById('myselect');
+        let numberseat;
+
+        select.addEventListener("change", function () {
+            numberseat = this.value;
+        });
+
+        document.getElementById("bookbutton").addEventListener("click", function () {
+            myFunction(numberseat);
+        });
+
+        function myFunction(x) {
+            var text = "You have booked " + x + " seats.";
+            alert(text);
+        }
+ }
+
+</script>
+    <div>
         @Html.DisplayFor(model => model.Showtime.ShowtimeMovie.MoviePlot)
         <br /><br />
         Antal lediga platser:
-        @Html.DisplayFor(model => model.Showtime.NumOfSeats)
+        @Html.DisplayFor(model => model.Showtime.OpenSeats)
 
     </div>
-    <form asp-action="BookSeats" asp-route-id="@Model.Showtime.Id">
+    <form method="post">
+        <input type="hidden" asp-for="Showtime.Id" />
         <fieldset>
-            <legend>Choose number of seats</legend>           
+            <legend>Choose number of seats</legend>
             <div class="form-group">
                 <label asp-for="Showtime.NumberOfBookedSeats">Example select</label>
-                <select class="form-control" id="exampleSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>  
-            <button type="submit" class="btn btn-primary">Submit</button>
+                <select asp-for="Showtime.NumberOfBookedSeats" class="form-control" id="myselect" value="1">
+                    @for (int i = 1; i <= Model.Showtime.OpenSeats && i <= 12; i++)
+                    {
+                        <option>@i</option>
+                    }
+                </select>               
+            </div>
+            <button type="submit" class="btn btn-primary" id="bookbutton">Book</button>
         </fieldset>
     </form>
 

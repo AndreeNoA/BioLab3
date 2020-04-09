@@ -24,22 +24,57 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Showtimes)
+            @foreach (var item in Model.Showtimes.Where(i => i.ShowtimeDate.Date == DateTime.Today))
             {
+            <tr>
 
-                <tr>
-                    <td>
-                        <h2>@Html.DisplayFor(modelItem => item.ShowtimeMovie.MovieTitle)</h2> <br /><br /><br />
-                        @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot)<br />
-                        @Html.DisplayFor(modelItem => item.NumOfSeats)
-                    </td>
+                @if (item.OpenSeats > 0)
+                {
+                <td>
+                    <h2>@Html.DisplayFor(modelItem => item.ShowtimeMovie.MovieTitle)</h2> <br /><br /><br />
+                    @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot)<br /><br />
+                    @if (item.NumOfSeats == 50)
+                    {
+                        <h2>Lilla Salongen</h2>
+
+                    }
+                    else
+                    {
+                        <h2>Stora Salongen</h2>
+                    }<br /><br />
+                           <P>Number of available seats: @Html.DisplayFor(modelItem => item.OpenSeats) </P>
+                </td>
                     <td class="w-50 mt-4">
                         <img src=@item.ShowtimeMovie.MoviePoster class="img-thumbnail">
                     </td>
                     <td>
-                        <a asp-page="./Details" asp-route-id="@item.Id">Info / Book seats</a> 
+                        <a asp-page="./Details" asp-route-id="@item.Id">Info / Book seats</a>
                     </td>
-                </tr>
+                }
+                else
+                {
+            <td style="background-color:gray">
+                <h2>@Html.DisplayFor(modelItem => item.ShowtimeMovie.MovieTitle)</h2> <br /><br /><br />
+                @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot)<br />
+                @if (item.NumOfSeats == 50)
+                {
+                    <h2>Lilla Salongen</h2>
+
+                }
+                else
+                {
+                    <h2>Stora Salongen</h2>
+                }
+            </td>
+                    <td class="w-50 mt-4" style="background-color:gray">
+                        <img src=@item.ShowtimeMovie.MoviePoster class="img-thumbnail">
+                    </td>
+                    <td style="background-color:gray">
+                        <div>No available seats</div>
+                    </td>
+                }
+
+            </tr>
             }
         </tbody>
     </table>

@@ -109,6 +109,34 @@ namespace BioLab
                 NumOfSeats = 50,
                 ShowtimeDate = setMovieTime(21, 00, 0).AddDays(1)
             });
+            context.Showtime.Add(new Showtime
+            {
+                Id = new Guid(),
+                ShowtimeMovie = context.Movie.Where(m => m.MovieTitle == "Gladiator").FirstOrDefault(),
+                NumOfSeats = 100,
+                ShowtimeDate = setMovieTime(18, 00, 0)
+            });
+            context.Showtime.Add(new Showtime
+            {
+                Id = new Guid(),
+                ShowtimeMovie = context.Movie.Where(m => m.MovieTitle == "The Hangover").FirstOrDefault(),
+                NumOfSeats = 100,
+                ShowtimeDate = setMovieTime(21, 00, 0)
+            });
+            context.Showtime.Add(new Showtime
+            {
+                Id = new Guid(),
+                ShowtimeMovie = context.Movie.Where(m => m.MovieTitle == "Gladiator").FirstOrDefault(),
+                NumOfSeats = 100,
+                ShowtimeDate = setMovieTime(18, 00, 0).AddDays(1)
+            });
+            context.Showtime.Add(new Showtime
+            {
+                Id = new Guid(),
+                ShowtimeMovie = context.Movie.Where(m => m.MovieTitle == "The Hangover").FirstOrDefault(),
+                NumOfSeats = 100,
+                ShowtimeDate = setMovieTime(21, 00, 0).AddDays(1)
+            });
             context.SaveChanges();
         }
     }
