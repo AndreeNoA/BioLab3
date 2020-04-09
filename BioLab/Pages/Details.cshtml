@@ -2,20 +2,18 @@
 @model BioLab.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Movie information";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1 style="text-align:center">Movie information</h1>
 
 <div>
-    <h4>Movie</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            Movie plot
+        <dt class="col-sm-2" >
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-10" >
             @Html.DisplayFor(model => model.Showtime.ShowtimeMovie.MoviePlot)
         </dd>
         <dt class="col-sm-2">
@@ -29,22 +27,24 @@
         </dd>
     </dl>
 </div>
-<h2>
-    Time of showing @Html.DisplayFor(model => model.Showtime.ShowtimeDate)
-</h2>
-<h2>
-    Available seats @Html.DisplayFor(model => model.Showtime.OpenSeats)
-</h2>
-@if (Model.Showtime.NumOfSeats == 50)
-{   
-    <h2>Lilla Salongen</h2>
+<div style="text-align:center">
+    <h2>
+        Time of showing @Html.DisplayFor(model => model.Showtime.ShowtimeDate)
+    </h2>
+    <h2>
+        Available seats @Html.DisplayFor(model => model.Showtime.OpenSeats)
+    </h2>
+    @if (Model.Showtime.NumOfSeats == 50)
+    {
+        <h2>Lilla Salongen</h2>
 
-}
-else
-{
-    <h2>Stora Salongen</h2>
-}
-<div>
-    <a asp-page="./Book" asp-route-id="@Model.Showtime.Id">Book the seats!</a> |
-    <a asp-page="./Index">Back to List</a>
+    }
+    else
+    {
+        <h2>Stora Salongen</h2>
+    }
+    <div>
+        <a asp-page="./Book" asp-route-id="@Model.Showtime.Id">Book seats</a> <br />
+        <a asp-page="./Index">Back to start</a>
+    </div>
 </div>

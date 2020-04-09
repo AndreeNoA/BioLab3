@@ -2,27 +2,17 @@
 @model BioLab.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bio";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1 style="text-align:center">Cinema</h1>
 
 
 @if (Model.Showtimes.Count() > 0)
 {
     <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    <div>Title</div>
-                </th>
-                <th>
-                    <div>Picture</div>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
+        
         <tbody>
             @foreach (var item in Model.Showtimes.Where(i => i.ShowtimeDate.Date == DateTime.Today))
             {
@@ -55,7 +45,7 @@
                 {
             <td style="background-color:gray">
                 <h2>@Html.DisplayFor(modelItem => item.ShowtimeMovie.MovieTitle)</h2> <br /><br /><br />
-                @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot)<br />
+                @Html.DisplayFor(modelItem => item.ShowtimeMovie.MoviePlot) <br /><br />
                 @if (item.NumOfSeats == 50)
                 {
                     <h2>Lilla Salongen</h2>
@@ -65,6 +55,7 @@
                 {
                     <h2>Stora Salongen</h2>
                 }
+                     <br /><br /><h2> This show is fully booked </h2>
             </td>
                     <td class="w-50 mt-4" style="background-color:gray">
                         <img src=@item.ShowtimeMovie.MoviePoster class="img-thumbnail">
