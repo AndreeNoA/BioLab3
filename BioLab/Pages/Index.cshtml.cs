@@ -77,6 +77,8 @@ namespace BioLab
                             "The emperor's son is enraged when he is passed over as heir in favour of his father's favourite general. He kills his father and arranges the murder of the general's family, " +
                             "and the general is sold into slavery to be trained as a gladiator - but his subsequent popularity in the arena threatens the throne."
             });
+            context.SaveChanges();
+
             context.Showtime.Add(new Showtime
             {
                 Id = new Guid(),
